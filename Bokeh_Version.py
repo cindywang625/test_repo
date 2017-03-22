@@ -188,17 +188,13 @@ data = {
     "Model":['Yearly Average Usage \n(kWh/sqf)', 'Estimated Average\n Baseload', 'Estimated Average Heating',
            'Estimated Average Cooling'],
     "Usage":[avuse, avbase, avheat, avcool]}
+source = ColumnDataSource(data)
+columns = [
+    TableColumn(field="Model", title=" "),
+    TableColumn(field="Usage", title="  ")
+]
 
-
-def p1graph(data):
-    p1 = bk.figure(title="Electricity", width=300, height=250)
-    p1.title.background_fill_color = '#6baed6'
-    
-    m1df = pd.DataFrame (df(data), columns = ['Model', 'Usage'])
-    p1 = pd.pivot_table(m1df,index = ['Model'])
-    return p1
-p1 = p1graph(data)
-print type(p1)
+p1 = DataTable(source=source, columns=columns)
 
 
 p1a = bk.figure(title="Electricity", width=400, height=250)
