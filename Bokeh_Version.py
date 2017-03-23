@@ -182,7 +182,7 @@ xlist_5p_fuel, ylist_5p_fuel = fivep_model(temp1, 25.3067355118, 57.8424987793, 
 bk.output_file("Dashboard.html", title="dashboard")
 
 #p1 = electricity values
-p1 = bk.figure(title="Electricity", width=300, height=250)
+p1 = bk.figure(title="Electricity", width=400, height=250)
 p1.title.background_fill_color = '#6baed6'
 data = {
     "Model":['Yearly Average Usage \n(kWh/sqf)', 'Estimated Average\n Baseload', 'Estimated Average Heating',
@@ -196,15 +196,13 @@ columns = [
 
 p1 = DataTable(source=source, columns=columns)
 
-
-p1a = bk.figure(title="Electricity", width=400, height=250)
+p1a = bk.figure(title="Electricity", width=300, height=250)
 p1a.hbar(y=[3, 2, 1], height=0.5, left=0,
         right=[avbase_value, avheat_value, avcool_value], color=['gray', 'orange', 'blue'])
 
 p1b = bk.figure(title="Electricity", width=50, height=250)
 data1 = dict(
     Usage1=[avbase_value, avheat_value, avcool_value]
-
 )
 source1 = ColumnDataSource(data1)
 columns = [
@@ -214,7 +212,7 @@ p1b = DataTable(source=source1, columns=columns)
 
 
 #p2 = fuel values
-p2 = bk.figure(title="Fuel", width=300, height=300)
+p2 = bk.figure(title="Fuel", width=400, height=300)
 p2.title.background_fill_color = '#fc9272'
 data = dict(
     Model=['Yearly Average Usage \n(kWh/sqf)', 'Estimated Average\n Baseload', 'Estimated Average Heating',
@@ -229,7 +227,7 @@ columns = [
 
 p2 = DataTable(source=source, columns=columns)
 
-p2a = bk.figure(title="Electricity", width=400, height=250)
+p2a = bk.figure(title="Electricity", width=300, height=250)
 p2a.hbar(y=[3, 2, 1], height=0.5, left=0,
         right=[favbase_value, favheat_value, favcool_value], color=['gray', 'orange', 'blue'])
 
@@ -409,7 +407,7 @@ data = {
 
 p12b = Bar(data, values='values', color='color', legend=False, stack='sample',
           title='EUI Rank', width=100)
-p12b.inverted_triangle(x=[1], y=[EUI], size=30, color='black')
+p12b.x(x=[1], y=[EUI], size=20, color='black', fill_color = None, line_width = 2)
 p12b.yaxis.axis_label = ' '
 
 p12c = bk.figure(title="Energy Breakdown & CO2e Emissions")
@@ -420,10 +418,11 @@ data = {
 }
 
 p12c = Bar(data, values='values', color='color', legend=False, stack='sample', title='CO2e/sqft Rank', width=120)
-p12c.inverted_triangle(x=[1], y=[CO2e], size=30, color='black')
+p12c.x(x=[1], y=[CO2e], size=20, color='black', fill_color = None, line_width = 2)
 p12c.yaxis.axis_label = ' '
 
 #set up the dashboard using gridplot
-s = gridplot([[p1, p1a, p1b, p2, p2a, p2b], [p3, p4], [p5, p6], [p7, p8], [p9, p10], [p11, p12, p12a, p12b, p12c]], toolbar_location='left')
+s = gridplot([[p1, p1a, p1b, p2, p2a, p2b], [p3, p4], [p5, p6], [p7, p8], [p9, p10], [p11, p12, p12a, p12b, p12c]], 
+    toolbar_location='left')
 curdoc().add_root(s)
 bk.show(s)
