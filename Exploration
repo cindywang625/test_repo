@@ -1,0 +1,15 @@
+
+avbase_value = 6.7
+avheat_value = 0
+avcool_value = 2.6
+
+bk.output_file("Dashboard.html", title="dashboard")
+p1b = bk.figure(title="Electricity", width=50, height=250)
+data1 = dict(
+    Usage1=[avbase_value, avheat_value, avcool_value]
+)
+source1 = ColumnDataSource(data1)
+columns = [
+    TableColumn(field="Usage1", title="kWh/sqf")
+]
+p1b = DataTable(source=source1, columns=columns)
